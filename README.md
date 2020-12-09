@@ -1,4 +1,4 @@
-# targetLoader
+# Target Loader
 Target Loader serves a niche function for my job: automates the installation of packages for the PS4 and PS5 target managers. Since it's required to install packages before I can perform my duties and the target managers do not allow for package queueing, any delay with installing packages slows down my work.
 
 # What It Does
