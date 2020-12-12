@@ -2,16 +2,13 @@ import pyautogui as kbm
 from python_imagesearch.imagesearch import imagesearch
 
 
-def find_img(img):
-    # locates an image and returns the position. Returns -1, -1 otherwise
-    return imagesearch(img)
-
-
-def click_button(pos):
-    # clicks the button at the given position and returns true for clicking the
-    # image. If the position is -1, the image wasn't clicked and returns false
-    if -1 not in pos:
-        kbm.click(pos)
+def click_button(img, xMod=0, yMod=0):
+    # attempts to locate the image and then clicks the button at the given
+    # position. returns true for clicking the image, and false if the image
+    # can't be found. Modifiers allow to click an image precisely
+    x, y = imagesearch(img)
+    if -1 not in (x, y):
+        kbm.click(x+xMod, y+yMod)
         return True
 
     else:
@@ -19,17 +16,24 @@ def click_button(pos):
 
 
 def alt_tab():
-    kbm.keyDown('alt')
-    kbm.press('tab')
-    pos = find_img('preview.jpg')
-    result = click_button(pos)
-    kbm.keyUp('alt')
-    return result
+    kbm.hotkey('alt', 'tab')
 
 
 def open_manager():
     pass
 
 
-read_settings():
+def read_settings():
     pass
+
+
+def main():
+    check = click_button('start.jpg')
+    if check:
+        click_button('install.jpg')
+    else:
+        switch = click_button('PS5_logo.jpg')
+        if switch:
+            main()
+        else:
+            open_manager()
